@@ -1,9 +1,8 @@
-import { TextInput as NativeTextInput } from 'react-native';
-import theme from '../theme';
+import { TextInput as NativeTextInput, StSheet } from 'react-native';
 
 const TextInput = ({ style, error, ...props }) => {
   const textInputStyle = [style];
-  const errorStyle = [{ ...style, borderColor: theme.colors.errorColor }]
+  const errorStyle = [{ ...style, borderColor: 'red' }]
 
   return <NativeTextInput style={error ? errorStyle : textInputStyle} {...props} />;
 };

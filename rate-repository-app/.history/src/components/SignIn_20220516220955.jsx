@@ -77,7 +77,7 @@ const SignIn = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
-      validationSchema={validationSchema}
+      vali
     >
       {({ handleSubmit }) => <LoginForm onSubmit={handleSubmit} />}
     </Formik>

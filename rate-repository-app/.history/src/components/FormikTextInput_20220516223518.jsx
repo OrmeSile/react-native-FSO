@@ -3,11 +3,10 @@ import { useField } from 'formik';
 
 import TextInput from './TextInput';
 import Text from './Text';
-import theme from '../theme';
 
 const styles = StyleSheet.create({
   errorText: {
-    color: theme.colors.errorColor,
+    color: 'red',
     alignSelf: 'flex-start'
   },
 });
@@ -15,6 +14,7 @@ const styles = StyleSheet.create({
 const FormikTextInput = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name);
   const showError = meta.touched && meta.error;
+  console.log(meta.error);
 
   return (
     <>

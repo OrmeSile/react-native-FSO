@@ -7,7 +7,7 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   errorText: {
-    color: theme.colors.errorColor,
+    color: theme.colors.,
     alignSelf: 'flex-start'
   },
 });

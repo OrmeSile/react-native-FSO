@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     margin: 10,
-    borderRadius: 3,
+    borderRadius: 3
   },
   container: {
     display: 'flex',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 10,
+    padding: 10
   },
   pressable: {
     backgroundColor: theme.colors.primary,
@@ -33,17 +33,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 3,
     padding: 15,
-    margin: 10,
+    margin: 10
   },
   buttonText: {
-    color: 'white',
-  },
+    color: 'white'
+  }
 });
 
 const validationSchema = yup.object().shape({
-  username: yup.string().required('Username required'),
-  password: yup.string().required('password required'),
-});
+  username: yup.string()
+})
 
 const LoginForm = ({ onSubmit }) => {
   return (
@@ -59,10 +58,10 @@ const LoginForm = ({ onSubmit }) => {
         name='password'
         placeholder='password'
       />
-      <Pressable style={styles.pressable} onPress={onSubmit}>
-        <Text style={styles.buttonText} fontSize='subheading' fontWeight='bold'>
-          Login
-        </Text>
+      <Pressable
+        style={styles.pressable}
+        onPress={onSubmit}>
+        <Text style={ styles.buttonText} fontSize='subheading' fontWeight='bold'>Login</Text>
       </Pressable>
     </View>
   );
@@ -74,11 +73,7 @@ const SignIn = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ handleSubmit }) => <LoginForm onSubmit={handleSubmit} />}
     </Formik>
   );
