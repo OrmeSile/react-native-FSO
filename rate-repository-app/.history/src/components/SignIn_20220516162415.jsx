@@ -1,0 +1,35 @@
+import Text from './Text';
+import FormikTextInput from './FormikTextInput';
+import { Formik } from 'formik';
+import { View, Pressable } from 'react-native';
+
+const initialValues = {
+  username: '',
+  password: '',
+};
+
+const LoginForm = ({ onSubmit }) => {
+  return (
+    <View>
+      <FormikTextInput name='username' placeholder='username' />
+      <FormikTextInput secureTextEntry = name='password' placeHolder='password' />
+      <Pressable onPress={onSubmit}>
+        <Text>Login</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+const SignIn = () => {
+  const onSubmit = (values) => {
+    console.log(values.username, values.password);
+  };
+
+  return (
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      {({ handleSubmit }) => <LoginForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
+};
+
+export default SignIn;
