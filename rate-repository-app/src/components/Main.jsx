@@ -4,6 +4,7 @@ import theme from '../theme';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +23,7 @@ const Main = () => {
         <Route path='/signin' element={<SignIn/>} exact />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
+      <StatusBar style='auto' />
     </View>
   );
 };
