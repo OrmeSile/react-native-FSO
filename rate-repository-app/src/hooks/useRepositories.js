@@ -9,13 +9,15 @@ const useRepositories = () => {
     { fetchPolicy: 'cache-and-network' }
   );
 
+
   useEffect(() => {
-    getRepositories();
+    if (!called) {
+      getRepositories();
+    }
     if (called && !loading) {
-      console.log(data);
       setRepositories(data.repositories);
     }
-  }, []);
+  }, [loading])
 
   return { repositories, loading, refetch: getRepositories };
 };
