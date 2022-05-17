@@ -1,2 +1,0 @@
-
-export RepositoryItem from "./RepositoryItem";
