@@ -8,11 +8,13 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint ./src/**/*.{js, jsx} App.js --no-error-on-unmatched-pattern"
+    "lint": "eslint ./src/**/*.{js, jsx} App.js --no-error-on-unmatched-pattern",
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.6.4",
     "@expo/metro-config": "^0.3.17",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "dotenv": "^16.0.1",
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
@@ -24,11 +26,29 @@
     "react-native": "0.64.3",
     "react-native-web": "0.17.1",
     "react-router-native": "^6.3.0",
-    "yup": "^0.32.11",
-    "@react-native-async-storage/async-storage": "~1.15.0"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^9.1.0",
+    "eslint-plugin-jest": "^26.2.2",
+    "jest": "^27.5.1",
+    "jest-expo": "^45.0.1",
+    "react-test-renderer": "^17.0.1"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-router-native)"
+    ],
+    "testPathIgnorePatterns": [
+      ".history"
+    ],
+    "setupFilesAfterEnv": ["<rootDir>/setupTests.js"]
   },
   "private": true
 }

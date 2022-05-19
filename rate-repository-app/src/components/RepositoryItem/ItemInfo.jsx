@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
 
 const ItemInfo = ({ logo, fullName, description, language }) => {
   return (
-    <View style={styles.imageAndTitle}>
+    <View testID='itemInfo' style={styles.imageAndTitle}>
       <Image style={styles.logo} source={{ uri: logo }} />
       <View style={styles.titleAndDesc}>
-        <Text>{fullName}</Text>
+        <Text >{fullName}</Text>
         <Text>{description}</Text>
         <Text style={styles.language}>{language}</Text>
       </View>

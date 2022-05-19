@@ -17,7 +17,7 @@ const RatingsInfo = ({ stars, forks, reviews, rating }) => {
 
   const RatingsInfoBlock = ({ value, name }) => {
     return (
-      <View style={styles.infoBlock}>
+      <View testID={`block${name}`} style={styles.infoBlock}>
         <Text fontWeight='bold' fontSize='subheading'>
           {value}
         </Text>

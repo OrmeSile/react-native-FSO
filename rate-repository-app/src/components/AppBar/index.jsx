@@ -2,9 +2,6 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../../theme';
 import AppBarTab, {ClickableBarTab} from './AppBarTab';
-import { useQuery } from '@apollo/client';
-import { ME } from '../../graphql/queries';
-import { useEffect, useState } from 'react';
 import useSignOut from '../../hooks/useSignOut';
 
 const styles = StyleSheet.create({
