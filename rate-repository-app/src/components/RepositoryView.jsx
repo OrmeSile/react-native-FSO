@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { GET_SINGLE_REPOSITORY } from '../graphql/queries';
-import RepositoryItem from './RepositoryItem';
 import { View } from 'react-native';
 import { useParams } from 'react-router-native';
 import Text from './Text';
+import ReviewList from './ReviewList';
 
 const RepositoryView = () => {
   const { id } = useParams();
-  const [repoInfo, setRepoInfo] = useState();
+  const [repoInfo, setRepoInfo] = useState([]);
 
   const { data, loading, error } = useQuery(GET_SINGLE_REPOSITORY, {
     variables: { id: id },
@@ -18,8 +18,7 @@ const RepositoryView = () => {
     if (data) {
       setRepoInfo(data.repository);
     }
-  }, [data]);
-
+  }, [loading]);
 
   if (loading) {
     return (
@@ -35,7 +34,11 @@ const RepositoryView = () => {
       </View>
     );
   }
-  return <View>{repoInfo && <RepositoryItem item={repoInfo} />}</View>;
+  return (
+    <View>
+      <ReviewList id={id} repo={repoInfo} />
+    </View>
+  );
 };
 
 export default RepositoryView;

@@ -30,7 +30,7 @@ export const ME = gql`
 
 export const GET_SINGLE_REPOSITORY = gql`
   query singleRepo($id: ID!) {
-    repository(id: $id){
+    repository(id: $id) {
       id
       fullName
       ratingAverage
@@ -42,5 +42,27 @@ export const GET_SINGLE_REPOSITORY = gql`
       ownerAvatarUrl
       url
     }
-  } 
-`
+  }
+`;
+
+export const GET_REPOSITORY_COMMENTS = gql`
+  query repoComments($id: ID!) {
+    repository(id: $id) {
+      id
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
