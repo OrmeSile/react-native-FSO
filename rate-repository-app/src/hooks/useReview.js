@@ -15,7 +15,6 @@ const useReview = () => {
         },
       },
     });
-    console.log(data);
     return data;
   }
   return [review, result];

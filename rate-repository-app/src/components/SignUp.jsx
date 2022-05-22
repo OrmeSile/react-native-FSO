@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { formTheme } from '../theme';
 import * as yup from 'yup';
-import useSignUp from '../hooks/useSignup';
+import useSignUp from '../hooks/useSignUp';
 import useSignIn from '../hooks/useSignIn';
 import { useNavigate } from 'react-router-native';
 
@@ -61,7 +61,6 @@ const SignUp = () => {
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-    console.log(username, password);
     try {
       await signUp({ username, password });
       await signIn({ username, password });

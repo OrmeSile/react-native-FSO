@@ -2,7 +2,7 @@ import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
 import { View, Pressable, StyleSheet } from 'react-native';
-import {formTheme} from '../theme';
+import { formTheme } from '../theme';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-native';
 import useReview from '../hooks/useReview';

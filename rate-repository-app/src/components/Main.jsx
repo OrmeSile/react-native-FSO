@@ -9,8 +9,6 @@ import RepositoryView from './RepositoryView';
 import Review from './Review';
 import SignUp from './SignUp';
 
-console.log(theme);
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.mainBackgroundColor,

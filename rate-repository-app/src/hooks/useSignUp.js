@@ -16,7 +16,6 @@ const useSignUp = () => {
       },
     });
     apolloClient.resetStore();
-    console.log(result.data);
     return result;
   };
 
