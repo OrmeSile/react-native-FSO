@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
 });
+
 const ReviewItem = ({ review }) => {
   const date = format(parseISO(review.createdAt), 'dd.MM.yyyy');
   return (

@@ -6,6 +6,10 @@ import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import { StatusBar } from 'expo-status-bar';
 import RepositoryView from './RepositoryView';
+import Review from './Review';
+import SignUp from './SignUp';
+
+console.log(theme);
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +26,9 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepositoryList />} exact />
         <Route path='/signin' element={<SignIn />} exact />
-        <Route path='/repositories/:id' element={<RepositoryView/>}/> 
+        <Route path='/repositories/:id' element={<RepositoryView />} exact />
+        <Route path='/review' element={<Review />} exact />
+        <Route path='/signup' element={<SignUp />} exact />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
       <StatusBar style='auto' />

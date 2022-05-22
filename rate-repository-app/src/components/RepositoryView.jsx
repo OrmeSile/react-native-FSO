@@ -12,6 +12,7 @@ const RepositoryView = () => {
 
   const { data, loading, error } = useQuery(GET_SINGLE_REPOSITORY, {
     variables: { id: id },
+    fetchPolicy: 'cache-and-network',
   });
 
   useEffect(() => {
@@ -34,11 +35,13 @@ const RepositoryView = () => {
       </View>
     );
   }
-  return (
-    <View>
-      <ReviewList id={id} repo={repoInfo} />
-    </View>
-  );
+  if (data && !loading) {
+    return (
+      <View style={{ flex: 1 }}>
+        <ReviewList id={id} repo={repoInfo} />
+      </View>
+    );
+  }
 };
 
 export default RepositoryView;

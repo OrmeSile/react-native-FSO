@@ -25,8 +25,10 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab text='Repositories' path='/' />
+        {data && data.me && <AppBarTab text='Create a review' path='/review'/>}
         {data && !data.me && <AppBarTab text='Sign In' path='/signin' />}
-        {data && data.me && <ClickableBarTab onClick ={handleClick} text='Sign out' path='/signIn' />}
+        {data && !data.me && <AppBarTab text='Sign Up' path='/signup' />}
+        {data && data.me && <ClickableBarTab onClick={handleClick} text='Sign out' path='/signIn' />}
       </ScrollView>
     </View>
   );

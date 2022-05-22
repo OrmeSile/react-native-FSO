@@ -17,11 +17,12 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const ReviewList = ({ id, repo }) => {
   const [reviews, setReviews] = useState([]);
   const { loading, data, error } = useQuery(GET_REPOSITORY_COMMENTS, {
+    fetchPolicy: 'cache-and-network',
     variables: { id },
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && !loading) {
       const reviews = data.repository.reviews.edges.map((edge) => edge.node);
       setReviews(reviews);
     }
@@ -43,7 +44,7 @@ const ReviewList = ({ id, repo }) => {
     <FlatList
       data={reviews}
       ItemSeparatorComponent={ItemSeparator}
-      ListHeaderComponent={() => <RepositoryItem item={repo}/>}
+      ListHeaderComponent={() => <RepositoryItem item={repo} />}
       renderItem={({ item }) => <ReviewItem review={item} />}
     />
   );
