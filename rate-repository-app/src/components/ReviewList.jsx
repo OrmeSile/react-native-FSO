@@ -1,10 +1,8 @@
-import { useQuery } from '@apollo/client';
 import { StyleSheet, FlatList, View } from 'react-native';
-import { GET_REPOSITORY_COMMENTS } from '../graphql/queries';
-import { useEffect, useState } from 'react';
 import Text from './Text';
 import ReviewItem from './ReviewItem';
 import RepositoryItem from './RepositoryItem';
+import useRepoReviews from '../hooks/useRepoReviews';
 
 const styles = StyleSheet.create({
   separator: {
@@ -15,23 +13,10 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const ReviewList = ({ id, repo }) => {
-  const [reviews, setReviews] = useState([]);
-  const { loading, data, error } = useQuery(GET_REPOSITORY_COMMENTS, {
-    fetchPolicy: 'cache-and-network',
-    variables: { id },
-  });
 
-  useEffect(() => {
-    if (data && !loading) {
-      const reviews = data.repository.reviews.edges.map((edge) => edge.node);
-      setReviews(reviews);
-    }
-  }, [loading]);
+  const { reviews, fetchMore, loading } = useRepoReviews({ repositoryId: id, first: 4 });
+  const reviewsNodes = reviews ? reviews.reviews.edges.map((edge) => edge.node) : [];
 
-  if (error) {
-    console.log(error);
-    return <View>{error.error}</View>;
-  }
   if (loading) {
     return (
       <View>
@@ -40,10 +25,16 @@ const ReviewList = ({ id, repo }) => {
     );
   }
 
+  const onEndReach = () => {
+    fetchMore();
+  }
+
   return (
     <FlatList
-      data={reviews}
+      data={reviewsNodes}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
       ListHeaderComponent={() => <RepositoryItem item={repo} />}
       renderItem={({ item }) => <ReviewItem review={item} />}
     />

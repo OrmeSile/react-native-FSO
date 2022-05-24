@@ -44,7 +44,7 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.textContainer}>
         <Text fontWeight='bold' fontSize='subheading'>
-          {review.user.username}
+          {review.user.username ? review.user.username : `${review.repository.ownerName}/${review.repository.name}`}
         </Text>
         <Text>{date}</Text>
         <Text>{review.text}</Text>
