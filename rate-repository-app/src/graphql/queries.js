@@ -102,6 +102,7 @@ export const GET_USER_REVIEWS = gql`
         }
         edges {
           node {
+            id
             repository {
               name
               ownerName

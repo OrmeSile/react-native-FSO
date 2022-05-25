@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const UserReviews = () => {
-  const { fetchMore, reviews, loading } = useUserReviews({ first: 4 });
+  const { fetchMore, reviews, loading, refetch } = useUserReviews({ first: 4 });
 
   const reviewNodes = reviews
     ? reviews.reviews.edges.map((edge) => edge.node)
@@ -30,6 +30,14 @@ const UserReviews = () => {
     );
   }
 
+  if (reviewNodes.length === 0) {
+    return (
+      <View>
+        <Text>No reviews yet...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <FlatList
@@ -38,7 +46,7 @@ const UserReviews = () => {
         onEndReached={onEndReach}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => <ReviewItem review={item} />}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_item, index) => index.toString()}
       />
     </View>
   );

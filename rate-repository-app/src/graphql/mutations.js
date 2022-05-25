@@ -14,12 +14,17 @@ export const REVIEW = gql`
       repositoryId
     }
   }
-`
+`;
 
 export const SIGNUP = gql`
-mutation CreateUser($user: CreateUserInput) {
-  createUser(user: $user) {
-    username
+  mutation CreateUser($user: CreateUserInput) {
+    createUser(user: $user) {
+      username
+    }
   }
-}
-`
+`;
+export const DELETE_REVIEW = gql`
+  mutation DeleteReview($deleteReviewId: ID!) {
+    deleteReview(id: $deleteReviewId)
+  }
+`;

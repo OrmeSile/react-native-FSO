@@ -1,8 +1,12 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable, Alert } from 'react-native';
 import Text from './Text';
 import { format } from 'date-fns';
 import parseISO from 'date-fns/parseISO';
 import theme from '../theme';
+import { useNavigate } from 'react-router-native';
+import { useMutation } from '@apollo/client';
+import { DELETE_REVIEW } from '../graphql/mutations';
+import useUserReviews from '../hooks/useUserReviews';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -35,6 +39,30 @@ const styles = StyleSheet.create({
 
 const ReviewItem = ({ review }) => {
   const date = format(parseISO(review.createdAt), 'dd.MM.yyyy');
+  const navigate = useNavigate();
+  const [mutate] = useMutation(DELETE_REVIEW);
+  const { refetch } = useUserReviews({first: 4});
+
+  const deleteReview = () => {
+    mutate({ variables: { deleteReviewId: review.id } });
+    refetch();
+  }
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete review',
+      'Are you sure you want to delete this review?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('cancel'),
+        },
+        {
+          text: 'Delete',
+          onPress: () => deleteReview(),
+        },
+      ]
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.rating}>
@@ -44,10 +72,24 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.textContainer}>
         <Text fontWeight='bold' fontSize='subheading'>
-          {review.user.username ? review.user.username : `${review.repository.ownerName}/${review.repository.name}`}
+          {review.user.username
+            ? review.user.username
+            : `${review.repository.ownerName}/${review.repository.name}`}
         </Text>
         <Text>{date}</Text>
         <Text>{review.text}</Text>
+        {!review.user.username && (
+          <Pressable
+            onPress={() => navigate(`/repositories/${review.repositoryId}`)}
+          >
+            <Text>View Repository</Text>
+          </Pressable>
+        )}
+        {!review.user.username && (
+          <Pressable onPress={handleDelete}>
+            <Text>Delete review</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );
